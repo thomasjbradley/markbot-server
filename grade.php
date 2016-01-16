@@ -5,6 +5,12 @@ require_once 'config.php';
 
 header('Content-type: text/html; charset=utf8');
 
+function quit () {
+  http_response_code(400);
+  echo 'HTTP/1.1 400 Bad request';
+  exit;
+}
+
 function debug ($message) {
   echo '<pre>';
   print_r($message);
@@ -19,11 +25,7 @@ $gh_pr = filter_input(INPUT_GET, 'gh_pr', FILTER_SANITIZE_NUMBER_INT);
 $canvas_course = filter_input(INPUT_GET, 'canvas_course', FILTER_SANITIZE_NUMBER_INT);
 $canvas_assignment = filter_input(INPUT_GET, 'canvas_assignment', FILTER_SANITIZE_NUMBER_INT);
 
-if (!$gh_user || !$gh_repo || !$gh_pr || !$canvas_course || !$canvas_assignment) {
-  http_response_code(400);
-  echo 'HTTP/1.1 400 Bad request';
-  exit;
-}
+if (!$gh_user || !$gh_repo || !$gh_pr || !$canvas_course || !$canvas_assignment) quit();
 
 $messages = [
   'BOOYAKASHA',
@@ -44,6 +46,9 @@ $messages = [
   'MATHMATICAL'
 ];
 $message = $messages[array_rand($messages)];
+
+if (!exists($user_map[$gh_user])) quit();
+
 $canvas_user = $user_map[$gh_user];
 $repo_bits = explode('/', $gh_repo);
 
