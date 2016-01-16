@@ -95,7 +95,7 @@ $data = [
     'text_comment' => $comment
   ],
   'submission' => [
-    'posted_grade' => 'complete'
+    'posted_grade' => 1
   ]
 ];
 
