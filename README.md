@@ -16,7 +16,10 @@ It’s a small single page application that expects a query string of parameters
 
 ```php
 $canvas_api_key = 'CANVAS_API_KEY';
+$github_api_key = 'GITHUB_API_KEY';
 ```
+
+*The GitHub API key is necessary to get the GitHub user who submitted the pull request.*
 
 ☛ `user-map.example.php` — Rename to just `user-map.php`. Fill with mappings of GitHub usernames to Canvas user IDs.
 
@@ -32,7 +35,6 @@ $user_map = [
 
 Make a `GET` request to the `grade.php` file (or the `/grade` route if using Google App Engine) with the following query string parameters:
 
-- `gh_user` — The GitHub username, should match an entry in `$user_map`
 - `gh_repo` — The GitHub repo, in the format of `user/repo`
 - `gh_pr` — The pull request ID, a number
 - `canvas_course` — The Canvas course ID number
@@ -41,14 +43,13 @@ Make a `GET` request to the `grade.php` file (or the `/grade` route if using Goo
 **Example request**
 
 ```
-/grade?gh_user=thomasjbradley&gh_repo=acgd-webdev-1%2Ffork-pass-tests&gh_pr=12&canvas_course=123456&canvas_assignment=1234567
+/grade?gh_repo=acgd-webdev-1%2Ffork-pass-tests&gh_pr=12&canvas_course=123456&canvas_assignment=1234567
 ```
 
 ### Within Travis CI
 
 The above information is available from with Travis:
 
-- `gh_user` — Use `git rev-parse --abbrev-ref HEAD` command to grab the current branch, then parse the GitHub username
 - `gh_repo` — The `TRAVIS_REPO_SLUG` environment variable
 - `gh_pr` — The `TRAVIS_PULL_REQUEST` environment variable
 
