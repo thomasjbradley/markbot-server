@@ -17,8 +17,6 @@ function debug ($message) {
   echo '</pre>';
 };
 
-$DEBUG = true;
-
 $gh_repo = filter_input(INPUT_GET, 'gh_repo', FILTER_SANITIZE_STRING);
 $gh_pr = filter_input(INPUT_GET, 'gh_pr', FILTER_SANITIZE_NUMBER_INT);
 $canvas_course = filter_input(INPUT_GET, 'canvas_course', FILTER_SANITIZE_NUMBER_INT);

@@ -1,5 +1,8 @@
 <?php
 
+// Turn on extra output during request & response
+$DEBUG = false;
+
 // Used to access Canvas
 $canvas_api_key = 'CANVAS_API_KEY';
 
