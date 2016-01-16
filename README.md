@@ -1,6 +1,6 @@
 # Travis CI to Canvas proxy
 
-**A small PHP proxy application for adding grades into Canvas after TravisCI checks pass.**
+**A small PHP proxy application for adding grades into Canvas after Travis CI checks pass.**
 
 Students will fork assignment repositories from GitHub, make their changes, and create a pull request. The pull request will trigger a series of tests with TravisCI.
 
