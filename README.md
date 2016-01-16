@@ -53,10 +53,10 @@ The above information is available from with Travis:
 - `gh_repo` — The `TRAVIS_REPO_SLUG` environment variable
 - `gh_pr` — The `TRAVIS_PULL_REQUEST` environment variable
 
-The other information I’d store in the `package.json` file of your repository.
+The other information I’d store in the `package.json` file of your repository. I usually create an object called `autoMarks` and put the stuff in there.
 
-- `canvas_assignment` — I put this as the `name` entry
-- `canvas_course` — Create a new entry called `canvas-course` or something
+- `canvas_course` — Create another entry called `package.json` as `autoMarks.canvasCourse`
+- `canvas_assignment` — I put this in `package.json` as `autoMarks.canvasAssignment`
 
 [**Check out my auto marking template.**](https://github.com/thomasjbradley/auto-marking-template)
 
