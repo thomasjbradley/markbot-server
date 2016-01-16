@@ -1,0 +1,16 @@
+application: travis-canvas-proxy
+runtime: php55
+api_version: 1
+threadsafe: yes
+
+skip_files:
+  - README.md
+  - config.example.php
+  - user-map.example.php
+  - .gitignore
+  - .editorconfig
+
+handlers:
+  - url: /grade.*
+    script: grade.php
+    secure: always
