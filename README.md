@@ -64,4 +64,4 @@ The other information I’d store in the `package.json` file of your repository.
 
 ## License & copyright
 
-© 2016 Thomas J Bradley — Licensed under the [MIT License](LICENSE).
+© 2016 Thomas J Bradley — [MIT License](LICENSE).
