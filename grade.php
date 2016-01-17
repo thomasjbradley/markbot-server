@@ -75,8 +75,6 @@ $canvas_user = $user_map[$gh_details->user->login];
 $repo_bits = explode('/', $gh_repo);
 
 $comment = <<<ROBOT
-.
-.
 +++++++++++++++++++++++++++++++++++++++++
  └[ ◕ 〜 ◕ ]┘ MARKBOT SAYS, "{$message}!"
 +++++++++++++++++++++++++++++++++++++++++
