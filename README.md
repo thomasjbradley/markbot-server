@@ -12,14 +12,14 @@ After those tests pass, this application is called with specific information to 
 
 It’s a small single page application that expects a query string of parameters. It’s capable of running on Google App Engine, but is not necessary.
 
-☛ `config.example.php` — Rename to just `config.php` and enter your Canvas API authentication key.
+☛ `config.example.php` — Rename to just `config.php` and enter your API authentication keys.
 
 ```php
 $canvas_api_key = 'CANVAS_API_KEY';
 $github_api_key = 'GITHUB_API_KEY';
 ```
 
-*The GitHub API key is necessary to get the GitHub user who submitted the pull request.*
+*The GitHub API key is used to get username of the person who submitted the pull request.*
 
 ☛ `user-map.example.php` — Rename to just `user-map.php`. Fill with mappings of GitHub usernames to Canvas user IDs.
 
@@ -55,7 +55,7 @@ The above information is available from with Travis:
 
 The other information I’d store in the `package.json` file of your repository. I usually create an object called `autoMarks` and put the stuff in there.
 
-- `canvas_course` — Create another entry called `package.json` as `autoMarks.canvasCourse`
+- `canvas_course` — Create another entry in `package.json` called `autoMarks.canvasCourse`
 - `canvas_assignment` — I put this in `package.json` as `autoMarks.canvasAssignment`
 
 [**Check out my auto marking template.**](https://github.com/thomasjbradley/auto-marking-template)
