@@ -6,6 +6,8 @@ Students will fork assignment repositories from GitHub, make their changes, and 
 
 After those tests pass, this application is called with specific information to mark their assignment complete inside Canvas.
 
+#### [Check out all the test in the Markbot repo](https://github.com/thomasjbradley/markbot)
+
 ---
 
 ## Quick setup
@@ -15,6 +17,7 @@ It’s a small single page application that expects a query string of parameters
 ☛ `config.example.php` — Rename to just `config.php` and enter your API authentication keys.
 
 ```php
+$canvas_base_url = 'CANVAS_SUB_DOMAIN'; // example: algonquin.instructure.com
 $canvas_api_key = 'CANVAS_API_KEY';
 $github_api_key = 'GITHUB_API_KEY';
 ```
@@ -53,12 +56,12 @@ The above information is available from with Travis:
 - `gh_repo` — The `TRAVIS_REPO_SLUG` environment variable
 - `gh_pr` — The `TRAVIS_PULL_REQUEST` environment variable
 
-The other information I’d store in the `package.json` file of your repository. I usually create an object called `autoMarks` and put the stuff in there.
+The other information I store in the `.markbot.yml` file of your repository.
 
-- `canvas_course` — Create another entry in `package.json` called `autoMarks.canvasCourse`
-- `canvas_assignment` — I put this in `package.json` as `autoMarks.canvasAssignment`
+- `canvas_course` — The entry in `.markbot.yml` called `canvasCourse`
+- `canvas_assignment` — I put this in `.markbot.yml` as `canvasAssignment`
 
-[**Check out my auto marking template.**](https://github.com/thomasjbradley/auto-marking-template)
+[**Check out Markbot.**](https://github.com/thomasjbradley/markbot)
 
 ---
 

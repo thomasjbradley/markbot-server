@@ -108,7 +108,7 @@ $request = [
     'verify_peer' => false
   ]
 ];
-$url = "https://algonquin.instructure.com/api/v1/courses/{$canvas_course}/assignments/{$canvas_assignment}/submissions/{$canvas_user}";
+$url = "https://{$canvas_base_url}/api/v1/courses/{$canvas_course}/assignments/{$canvas_assignment}/submissions/{$canvas_user}";
 
 if ($DEBUG) debug($data);
 if ($DEBUG) debug($url);
