@@ -6,7 +6,7 @@ Students will fork assignment repositories from GitHub, make their changes, and 
 
 After those tests pass, this application is called with specific information to mark their assignment complete inside Canvas.
 
-#### [Check out all the test in the Markbot repo](https://github.com/thomasjbradley/markbot)
+#### [Check out all the tests in the Markbot repo.](https://github.com/thomasjbradley/markbot)
 
 ---
 
