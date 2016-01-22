@@ -22,7 +22,7 @@ $canvas_api_key = 'CANVAS_API_KEY';
 $github_api_key = 'GITHUB_API_KEY';
 ```
 
-*The GitHub API key is used to get username of the person who submitted the pull request.*
+*The GitHub API key is used to get the username of the person who submitted the pull request.*
 
 ☛ `user-map.example.php` — Rename to just `user-map.php`. Fill with mappings of GitHub usernames to Canvas user IDs.
 
@@ -51,12 +51,12 @@ Make a `GET` request to the `grade.php` file (or the `/grade` route if using Goo
 
 ### Within Travis CI
 
-The above information is available from with Travis:
+The above information is available from within Travis:
 
 - `gh_repo` — The `TRAVIS_REPO_SLUG` environment variable
 - `gh_pr` — The `TRAVIS_PULL_REQUEST` environment variable
 
-The other information I store in the `.markbot.yml` file of your repository.
+Store the other information in the `.markbot.yml` file of your repository.
 
 - `canvas_course` — The entry in `.markbot.yml` called `canvasCourse`
 - `canvas_assignment` — I put this in `.markbot.yml` as `canvasAssignment`
