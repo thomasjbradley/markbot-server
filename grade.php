@@ -18,11 +18,11 @@ function debug ($message) {
 };
 
 $gh_repo = filter_input(INPUT_GET, 'gh_repo', FILTER_SANITIZE_STRING);
-$gh_pr = filter_input(INPUT_GET, 'gh_pr', FILTER_SANITIZE_NUMBER_INT);
+$gh_username = filter_input(INPUT_GET, 'gh_username', FILTER_SANITIZE_STRING);
 $canvas_course = filter_input(INPUT_GET, 'canvas_course', FILTER_SANITIZE_NUMBER_INT);
 $canvas_assignment = filter_input(INPUT_GET, 'canvas_assignment', FILTER_SANITIZE_NUMBER_INT);
 
-if (!$gh_repo || !$gh_pr || !$canvas_course || !$canvas_assignment) quit();
+if (!$gh_repo || !$gh_username || !$canvas_course || !$canvas_assignment) quit();
 
 $messages = [
   'BOOYAKASHA',
@@ -44,46 +44,18 @@ $messages = [
 ];
 $message = $messages[array_rand($messages)];
 
-$request = [
-  'http' => [
-    'method' => 'GET',
-    'header' => implode("\r\n", [
-      "Authorization: token $github_api_key",
-      'Accept: application/vnd.github.v3+json'
-    ]),
-    'verify_peer' => false
-  ]
-];
-$url = "https://api.github.com/repos/{$gh_repo}/pulls/{$gh_pr}";
-
-if ($DEBUG) debug($url);
-if ($DEBUG) debug($request);
-
-$context = stream_context_create($request);
-$response = file_get_contents($url, false, $context);
-
-if (!$response) quit();
-
-$gh_details = json_decode($response);
-
-if ($DEBUG) debug($gh_details);
-if ($DEBUG) debug($gh_details->user->login);
-
-if (!isset($user_map[$gh_details->user->login])) quit();
-
-$canvas_user = $user_map[$gh_details->user->login];
-$repo_bits = explode('/', $gh_repo);
+$canvas_user = $user_map[$gh_username];
 
 $comment = <<<ROBOT
 +++++++++++++++++++++++++++++++++++++++++
  └[ ◕ 〜 ◕ ]┘ MARKBOT SAYS, "{$message}!"
 +++++++++++++++++++++++++++++++++++++++++
 
-Pull request:
-https://github.com/{$gh_repo}/pull/{$gh_pr}
+Repository URL:
+https://github.com/{$gh_username}/{$gh_repo}
 
 Website URL:
-https://{$gh_details->user->login}.github.io/{$repo_bits[1]}
+https://{$gh_username}.github.io/{$gh_repo}
 
 +++++++++++++++++++++++++++++++++++++++++
 ROBOT;

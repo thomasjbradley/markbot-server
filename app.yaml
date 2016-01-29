@@ -1,4 +1,4 @@
-application: travis-canvas-proxy
+application: markbot-canvas-proxy
 version: 1
 runtime: php55
 api_version: 1
