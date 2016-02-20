@@ -5,9 +5,14 @@ require_once 'config.php';
 
 header('Content-type: text/html; charset=utf8');
 
-function quit () {
-  http_response_code(400);
-  echo 'HTTP/1.1 400 Bad request';
+function quit ($code = 400, $message = 'Incomplete or missing arguments') {
+  http_response_code($code);
+
+  echo json_encode([
+    'code' => $code,
+    'message' => $message
+  ]);
+
   exit;
 }
 
@@ -21,8 +26,13 @@ $gh_repo = filter_input(INPUT_GET, 'gh_repo', FILTER_SANITIZE_STRING);
 $gh_username = filter_input(INPUT_GET, 'gh_username', FILTER_SANITIZE_STRING);
 $canvas_course = filter_input(INPUT_GET, 'canvas_course', FILTER_SANITIZE_NUMBER_INT);
 $canvas_assignment = filter_input(INPUT_GET, 'canvas_assignment', FILTER_SANITIZE_NUMBER_INT);
+$markbot_version = filter_input(INPUT_GET, 'markbot_version', FILTER_SANITIZE_STRING);
 
-if (!$gh_repo || !$gh_username || !$canvas_course || !$canvas_assignment) quit();
+if (!$gh_repo || !$gh_username || !$canvas_course || !$canvas_assignment || !$markbot_version) quit();
+
+if (!version_compare($markbot_version, $min_markbot_version, '>=')) {
+  quit(400, "Markbot version too old, expecting >= $min_markbot_version");
+}
 
 $messages = [
   'BOOYAKASHA',
@@ -91,4 +101,4 @@ $response = file_get_contents($url, false, $context);
 
 if ($DEBUG) debug(json_decode($response));
 
-echo 'MARKBOT STATUS: COMPLETE';
+quit(200, 'MARKBOT STATUS: SUCCESS');

@@ -51,11 +51,12 @@ Make a `GET` request to the `grade.php` file (or the `/grade` route if using Goo
 - `gh_username` — The students GitHub username for matching against their Canvas ID
 - `canvas_course` — The Canvas course ID number
 - `canvas_assignment` — The Canvas assignment ID number
+- `markbot_version` — The version of the Markbot app that sent this request—to help prevent students from using outdated version
 
 **Example request**
 
 ```
-/grade?gh_repo=using-markbot&gh_username=thomasjbradley&canvas_assignment=1234567&canvas_course=123456
+/grade?gh_repo=using-markbot&gh_username=thomasjbradley&canvas_assignment=1234567&canvas_course=123456&markbot_version=2.6.1
 ```
 
 ---
