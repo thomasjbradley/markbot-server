@@ -47,11 +47,11 @@ $user_map = [
 
 Make a `GET` request to the `grade.php` file (or the `/grade` route if using Google App Engine) with the following query string parameters:
 
-- `gh_repo` — The GitHub repo, in the format of `repo`
+- `gh_repo` — The GitHub repo name
 - `gh_username` — The students GitHub username for matching against their Canvas ID
 - `canvas_course` — The Canvas course ID number
 - `canvas_assignment` — The Canvas assignment ID number
-- `markbot_version` — The version of the Markbot app that sent this request—to help prevent students from using outdated version
+- `markbot_version` — The version of the Markbot app that sent this request—to help prevent students from using outdated versions
 
 **Example request**
 
