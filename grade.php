@@ -5,7 +5,7 @@ require_once 'config.php';
 
 header('Content-type: text/html; charset=utf8');
 
-function quit ($code = 400, $message = 'Incomplete or missing arguments') {
+function quit ($code = 400, $message = 'Incomplete or missing arguments—double check you have the most recent version of Markbot') {
   http_response_code($code);
 
   echo json_encode([
@@ -85,6 +85,7 @@ $messages = [
   'STUPENDOUS',
   'MATHMATICAL'
 ];
+$markbot_mouth = '◡';
 
 if ($cheater == 0) {
   $message = $messages[array_rand($messages)];
@@ -92,13 +93,14 @@ if ($cheater == 0) {
 } else {
   $message = 'CHEATER';
   $cheater_message = $cheater_message_template;
+  $markbot_mouth = '〜';
 }
 
 $canvas_user = $user_map[$gh_username];
 
 $comment = <<<ROBOT
 +++++++++++++++++++++++++++++++++++++++++
- └[ ◕ 〜 ◕ ]┘ MARKBOT SAYS, "{$message}!"
+ └[ ◕ ${markbot_mouth} ◕ ]┘ MARKBOT SAYS, "{$message}!"
 +++++++++++++++++++++++++++++++++++++++++
 ${cheater_message}
 Repository URL:
