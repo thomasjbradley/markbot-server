@@ -36,8 +36,8 @@ $sig = filter_input(INPUT_GET, 'sig', FILTER_SANITIZE_STRING);
 
 if (!$gh_repo || !$gh_username || !$canvas_course || !$canvas_assignment || !$markbot_version || !$sig || !in_array($cheater, [0, 1])) quit();
 
-if (!version_compare($markbot_version, $min_markbot_version, '>=')) {
-  quit(400, "Markbot version too old, expecting >= $min_markbot_version");
+if (!version_compare($markbot_version, $config['min_markbot_version'], '>=')) {
+  quit(400, "Markbot version too old, expecting >= {$config['min_markbot_version']}");
 }
 
 $generated_sig = hash_request($config, [
@@ -112,6 +112,29 @@ https://{$gh_username}.github.io/{$gh_repo}
 +++++++++++++++++++++++++++++++++++++++++
 ROBOT;
 
+$check_graded_request = [
+  'http' => [
+    'method' => 'GET',
+    'header' => implode("\r\n", [
+      "Authorization: Bearer {$config['canvas_api_key']}",
+      "Content-Type: application/json"
+    ]),
+    'verify_peer' => false
+  ]
+];
+$check_graded_url = "https://{$config['canvas_base_url']}/api/v1/courses/{$canvas_course}/assignments/{$canvas_assignment}/submissions/{$canvas_user}";
+
+$context = stream_context_create($check_graded_request);
+$response = file_get_contents($check_graded_url, false, $context);
+
+if (!$response) quit(501, 'There was a problem contacting Canvas—try again later');
+
+$response_data = json_decode($response);
+
+if (!$response_data) quit(501, 'There was a problem contacting Canvas—try again later');
+
+if ($response_data->grade !== null || $response_data->score !== null) quit(400, 'This assignment has already been submitted');
+
 $data = [
   'comment' => [
     'text_comment' => $comment
@@ -121,7 +144,7 @@ $data = [
   ]
 ];
 
-$request = [
+$grade_request = [
   'http' => [
     'method' => 'PUT',
     'header' => implode("\r\n", [
@@ -132,15 +155,16 @@ $request = [
     'verify_peer' => false
   ]
 ];
-$url = "https://{$config['canvas_base_url']}/api/v1/courses/{$canvas_course}/assignments/{$canvas_assignment}/submissions/{$canvas_user}";
+$grade_url = "https://{$config['canvas_base_url']}/api/v1/courses/{$canvas_course}/assignments/{$canvas_assignment}/submissions/{$canvas_user}";
 
 if ($config['DEBUG']) debug($data);
 if ($config['DEBUG']) debug($url);
 if ($config['DEBUG']) debug($request);
 
-$context = stream_context_create($request);
-$response = file_get_contents($url, false, $context);
+$context = stream_context_create($grade_request);
+$response = file_get_contents($grade_url, false, $context);
 
+if (!$response) quit(501, 'There was a problem contacting Canvas—try again later');
 if ($config['DEBUG']) debug(json_decode($response));
 
 quit(200, 'MARKBOT STATUS: SUCCESS');
