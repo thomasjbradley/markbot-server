@@ -133,7 +133,7 @@ $response_data = json_decode($response);
 
 if (!$response_data) quit(501, 'There was a problem contacting Canvas—try again later');
 
-if ($response_data->grade !== null || $response_data->score !== null) quit(400, 'This assignment has already been submitted');
+if ($response_data->grade !== null || $response_data->score !== null) quit(400, 'This assignment has already been graded');
 
 $data = [
   'comment' => [
