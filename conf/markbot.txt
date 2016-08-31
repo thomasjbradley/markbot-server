@@ -1,0 +1,11 @@
++++++++++++++++++++++++++++++++++++++++++
+ └[ ◕ ${markbot_mouth} ◕ ]┘ MARKBOT SAYS, "${quote}!"
++++++++++++++++++++++++++++++++++++++++++
+${cheater_message}
+Repository URL:
+https://github.com/${gh_username}/${gh_repo}
+
+Website URL:
+https://${gh_username}.github.io/${gh_repo}
+
++++++++++++++++++++++++++++++++++++++++++

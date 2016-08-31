@@ -1,0 +1,12 @@
+
+Markbot has detected that you cheated by
+performing one of these actions:
+- changing the “.markbot.yml” file,
+- removing the “.markbot.lock” file,
+- modifying locked code files,
+- modifying the screenshots,
+- or modifying the Markbot application.
+
+Because of this you’ve received a 0.
+
++++++++++++++++++++++++++++++++++++++++++
