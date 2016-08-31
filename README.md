@@ -34,6 +34,14 @@ It’s a small single page application that expects a query string of parameters
 'passcode_hash' => 'YOUR_MARKBOT_LOCK_PASSCODE_HASH',
 ```
 
+Fill in a mapping of what string you want to use in your `.markbot.yml` files to what the Canvas ID is. This is an automation step so that you don’t have to change all the assignments every year when there’s a new Canvas course ID.
+
+```php
+'courses' => [
+  'web-dev-1' => 'CANVAS_COURSE_ID',
+],
+```
+
 ☛ `user-map.example.php` — Rename to just `user-map.php`. Fill with mappings of GitHub usernames to Canvas user IDs.
 
 ```php
@@ -50,8 +58,7 @@ Make a `GET` request to the `grade.php` file (or the `/grade` route if using Goo
 
 - `gh_repo` — The GitHub repo name
 - `gh_username` — The students GitHub username for matching against their Canvas ID
-- `canvas_course` — The Canvas course ID number
-- `canvas_assignment` — The Canvas assignment ID number
+- `canvas_course` — The string mapped to the Canvas ID in `config.php`
 - `markbot_version` — The version of the Markbot app that sent this request—to help prevent students from using outdated versions
 - `cheater` — `0` or `1`: whether the student cheated on the assignment
 - `sig` — A sha512 hash of all the previous parameters & the hashed passcode
@@ -59,7 +66,7 @@ Make a `GET` request to the `grade.php` file (or the `/grade` route if using Goo
 **Example request**
 
 ```
-/grade?gh_repo=using-markbot&gh_username=thomasjbradley&canvas_assignment=1234567&canvas_course=123456&markbot_version=2.10.0&cheater=1&sig=ec17e2bf78a4ee76d7467adfdf6d9567bbbf2f2c0e6e70744b8925136e1642b3156da453795cdebe6311df3857e6a45343abb686c99bdd15d25cee86c55abe60
+/grade?gh_repo=using-markbot&gh_username=thomasjbradley&canvas_course=web-dev-1&markbot_version=3.6.2&cheater=1&sig=ec17e2bf78a4ee76d7467adfdf6d9567bbbf2f2c0e6e70744b8925136e1642b3156da453795cdebe6311df3857e6a45343abb686c99bdd15d25cee86c55abe60
 ```
 
 ---
