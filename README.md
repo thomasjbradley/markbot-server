@@ -71,6 +71,16 @@ Make a `GET` request to the `grade.php` file (or the `/grade` route if using Goo
 
 ---
 
+## Setting up assignments in Canvas
+
+In an attempt to prevent a super maintenance overhead of Canvas assignments and constantly having to change IDs, I’ve decided to hack some information into the Canvas assignments.
+
+Each assignment that you create on Canvas, should be set to “No submission” because Markbot will be doing the assignment submissions. But the ID for the assignment isn’t stored anywhere—only the `repo` slug.
+
+So, in each assignment, I store the repo slug in the `allowed_extensions` field—Markbot server will search through all the assignments in the course and pick out the one with a matching entry in `allowed_extensions` and will submit the grade to that assignment.
+
+---
+
 ## License & copyright
 
 © 2016 Thomas J Bradley — [MIT License](LICENSE).
