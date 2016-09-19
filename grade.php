@@ -33,6 +33,8 @@ $generated_sig = hash_request($config, [
 if ($sig != $generated_sig) quit();
 if (!isset($config['courses'][$canvas_course])) quit();
 
+if (!isset($user_map[$gh_username])) quit(401, 'Your GitHub username doesn’t match any approved users—double check the capitalization');
+
 $canvas_user = $user_map[$gh_username];
 $canvas = \Canvas\setup($config['canvas_base_url'], $config['canvas_api_key']);
 $course = \Canvas\course($canvas, $config['courses'][$canvas_course]);
