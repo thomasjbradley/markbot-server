@@ -1,3 +1,5 @@
+**This application is no longer maintained. Markbot favours submitting directly to [Learn the Web’s progress tracking app](https://github.com/acgd-learn-the-web/progressinator).**
+
 # Markbot Server
 
 **A small PHP proxy application for adding grades into Canvas after [Markbot](https://github.com/thomasjbradley/markbot) checks pass.**
